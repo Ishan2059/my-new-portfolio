@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0A0A0A;
+  --color-surface: #141414;
+  --color-border: #222222;
+  --color-accent: #CAFF00;
+  --color-accent-dim: #A8D600;
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #8A8A8A;
+  --color-text-muted: #444444;
+  
+  --shadow-card: 0 0 0 1px var(--color-border), 0 8px 32px rgba(0,0,0,0.4);
+  --glow-accent: 0 0 24px rgba(202,255,0,0.15);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-dm-sans), sans-serif;
+  position: relative;
+}
+
+/* Grain overlay texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  z-index: 10000;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 16px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Typography base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 700;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
