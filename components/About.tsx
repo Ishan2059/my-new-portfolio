@@ -107,7 +107,7 @@ export default function About() {
 
               <details className="group">
                 <summary className="font-dm font-medium text-[16px] text-text-primary cursor-pointer list-none flex items-center justify-between py-3 hover:text-accent transition-colors">
-                  Where can I see Ishan Mishra's design work?
+                  Where can I see Ishan Mishra&apos;s design work?
                   <span className="text-accent group-open:rotate-45 transition-transform">+</span>
                 </summary>
                 <p className="font-dm text-[15px] leading-[1.7] text-text-secondary mt-2 pl-4">
