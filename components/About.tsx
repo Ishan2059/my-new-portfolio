@@ -37,8 +37,8 @@ export default function About() {
           <MotionWrapper delay={0.1}>
             <div className="space-y-6 max-w-[600px]">
               <p className="font-dm text-[18px] leading-[1.7] text-text-secondary">
-                I'm Ishan Mishra, a UI/UX Designer from Nepal. I don't just
-                make things look good ,I figure out what's broken, why it
+                I&apos;m Ishan Mishra, a UI/UX Designer from Nepal. I don&apos;t just
+                make things look good ,I figure out what&apos;s broken, why it
                 confuses people, and how to fix it at the root. Then I make
                 it look good too.
               </p>

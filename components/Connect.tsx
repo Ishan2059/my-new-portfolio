@@ -46,7 +46,7 @@ export default function Connect() {
               id="connect-heading"
               className="font-syne font-extrabold text-[clamp(40px,6vw,64px)] leading-tight tracking-[-0.03em] text-text-primary"
             >
-              Let's build
+              Let&apos;s build
               <br />
               something.
             </h2>
@@ -55,7 +55,7 @@ export default function Connect() {
           <MotionWrapper delay={0.2}>
             <p className="font-dm text-[17px] leading-[1.65] text-text-secondary max-w-[420px]">
               Whether you have a specific project or just a problem
-              you can't figure out — reach out. I respond to everyone.
+              you can&apos;t figure out — reach out. I respond to everyone.
             </p>
           </MotionWrapper>
 
