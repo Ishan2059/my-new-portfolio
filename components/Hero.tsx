@@ -80,7 +80,7 @@ export default function Hero() {
             transition={{ delay: 0.9, duration: 0.6 }}
             className="font-dm text-[18px] leading-[1.65] text-text-secondary max-w-[480px]"
           >
-            Hi, I&apos;m Ishan Mishra. I design digital products that work clearly,
+            Hey, I&apos;m Ishan Mishra. I design digital products that work clearly,
             beautifully, and without confusion. Based in Biratnagar, Nepal.
             Available for freelance work worldwide.
           </motion.p>
