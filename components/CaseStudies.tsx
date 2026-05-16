@@ -43,9 +43,9 @@ export default function CaseStudies() {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               {/* Top Left - Title */}
-              <div className="font-syne font-extrabold text-[clamp(40px,8vw,64px)] leading-none text-text-primary">
+              <div className="font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-text-primary break-words">
                 BEHANCE
               </div>
 
@@ -57,14 +57,14 @@ export default function CaseStudies() {
                 >
                   <ArrowUpRight
                     size={32}
-                    className="text-accent"
+                    className="text-accent flex-shrink-0"
                     aria-hidden="true"
                   />
                 </motion.div>
               </div>
 
               {/* Bottom - Description */}
-              <div className="md:col-span-2 font-dm text-[14px] text-text-muted">
+              <div className="md:col-span-2 font-dm text-[12px] md:text-[14px] text-text-muted break-words">
                 Full case studies with process documentation →
               </div>
             </div>

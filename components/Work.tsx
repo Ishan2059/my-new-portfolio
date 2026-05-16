@@ -40,10 +40,10 @@ export default function Work() {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-8">
               {/* Left - Large Text */}
               <motion.div
-                className="font-syne font-extrabold text-[clamp(40px,8vw,64px)] leading-none text-accent"
+                className="font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-accent break-words"
                 whileHover={{ x: 8 }}
                 transition={{ duration: 0.2 }}
               >
@@ -51,7 +51,7 @@ export default function Work() {
               </motion.div>
 
               {/* Right - Tagline */}
-              <div className="font-dm text-[14px] text-text-muted">
+              <div className="font-dm text-[12px] md:text-[14px] text-text-muted flex-shrink-0">
                 View all design shots
               </div>
             </div>
