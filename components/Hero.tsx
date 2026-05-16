@@ -90,18 +90,18 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.6 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <MagneticButton
               onClick={handleWorkClick}
-              className="bg-accent text-bg font-syne font-bold text-[14px] px-10 py-5 rounded-full hover:bg-accent-dim transition-colors"
+              className="w-full sm:w-auto bg-accent text-bg font-syne font-bold text-[14px] px-10 py-5 rounded-full hover:bg-accent-dim transition-colors"
             >
               See My Work
             </MagneticButton>
             <a
               href="/resume.pdf"
               download="Ishan-Mishra-Resume.pdf"
-              className="border border-[#333] text-text-primary font-syne font-bold text-[14px] px-10 py-5 rounded-full hover:border-accent hover:text-accent transition-colors"
+              className="w-full sm:w-auto border border-[#333] text-text-primary font-syne font-bold text-[14px] px-10 py-5 rounded-full hover:border-accent hover:text-accent transition-colors text-center"
             >
               Download Resume
             </a>
