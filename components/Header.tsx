@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
@@ -14,19 +13,8 @@ const navLinks = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  const { scrollY } = useScroll()
-
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 60],
-    ['rgba(10,10,10,0)', 'rgba(10,10,10,0.95)']
-  )
-
-  const backdropBlur = useTransform(
-    scrollY,
-    [0, 60],
-    ['blur(0px)', 'blur(12px)']
-  )
+  const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     let ticking = false
@@ -36,8 +24,11 @@ export default function Header() {
       ticking = true
 
       requestAnimationFrame(() => {
+        const scrollY = window.scrollY
+        setScrolled(scrollY > 60)
+
         const sections = ['home', 'about', 'work', 'case-studies', 'connect']
-        const scrollPosition = window.scrollY + 100
+        const scrollPosition = scrollY + 100
 
         for (const section of sections) {
           const element = document.getElementById(section)
@@ -54,6 +45,8 @@ export default function Header() {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    // Initial check
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -67,11 +60,18 @@ export default function Header() {
     }
   }
 
+  // Pure CSS class toggling replaces framer-motion useTransform
+  const headerClasses = `fixed top-0 left-0 right-0 z-[1000] border-b transition-all duration-300 ${
+    scrolled 
+      ? 'bg-[rgba(10,10,10,0.95)] md:bg-[rgba(10,10,10,0.85)] border-transparent backdrop-blur-[12px] md:backdrop-blur-[12px]' 
+      : 'bg-transparent border-transparent backdrop-blur-none'
+  }`
+
   return (
     <>
-      <motion.header
-        style={{ backgroundColor, backdropFilter: backdropBlur }}
-        className="fixed top-0 left-0 right-0 z-[1000] border-b border-transparent transition-colors"
+      <header
+        ref={headerRef}
+        className={headerClasses}
       >
         <nav
           className="max-w-[1440px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between"
@@ -122,33 +122,30 @@ export default function Header() {
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[999] bg-bg md:hidden"
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-8">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="font-syne font-bold text-4xl hover:text-accent transition-colors"
-              >
-                {link.label}
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      <div 
+        className={`fixed inset-0 z-[999] bg-bg md:hidden transition-opacity duration-300 ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center h-full gap-8">
+          {navLinks.map((link, index) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              style={{ transitionDelay: mobileMenuOpen ? `${index * 0.1}s` : '0s' }}
+              className={`font-syne font-bold text-4xl hover:text-accent transition-all duration-300 transform ${
+                mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </>
   )
 }

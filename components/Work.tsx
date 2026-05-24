@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import MotionWrapper from './MotionWrapper'
 
 export default function Work() {
@@ -32,23 +29,17 @@ export default function Work() {
 
         {/* Large Card */}
         <MotionWrapper delay={0.2}>
-          <motion.a
+          <a
             href="https://dribbble.com/Ishan_Mishra"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer overflow-hidden"
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3 }}
+            className="card-link block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer overflow-hidden relative"
           >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-8">
               {/* Left - Large Text */}
-              <motion.div
-                className="font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-accent break-words"
-                whileHover={{ x: 8 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="card-link-text font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-accent break-words">
                 DRIBBBLE →
-              </motion.div>
+              </div>
 
               {/* Right - Tagline */}
               <div className="font-dm text-[12px] md:text-[14px] text-text-muted flex-shrink-0">
@@ -56,14 +47,9 @@ export default function Work() {
               </div>
             </div>
 
-            {/* Hover effect border */}
-            <motion.div
-              className="absolute inset-0 border-2 border-transparent rounded-md pointer-events-none"
-              initial={{ borderColor: 'transparent' }}
-              whileHover={{ borderColor: '#CAFF00' }}
-              transition={{ duration: 0.2 }}
-            />
-          </motion.a>
+            {/* Hover effect border — CSS only */}
+            <span className="card-link-border absolute inset-0 border-2 border-transparent rounded-md pointer-events-none" />
+          </a>
         </MotionWrapper>
       </div>
     </section>

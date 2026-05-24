@@ -1,7 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { useRef, useEffect, ReactNode } from 'react'
 
 interface MotionWrapperProps {
   children: ReactNode
@@ -10,41 +9,46 @@ interface MotionWrapperProps {
   className?: string
 }
 
+// Pure CSS IntersectionObserver — zero framer-motion, zero JS animation cost.
+// Adds a CSS class when the element enters the viewport.
+// All animation is handled by GPU compositor-thread CSS transitions.
 export default function MotionWrapper({
   children,
   delay = 0,
   direction = 'up',
   className = '',
 }: MotionWrapperProps) {
-  const shouldReduceMotion = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
 
-  const directionOffset = {
-    up: { y: 40, x: 0 },
-    left: { y: 0, x: -40 },
-    right: { y: 0, x: 40 },
-  }
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
 
-  const initial = shouldReduceMotion
-    ? { opacity: 0 }
-    : { ...directionOffset[direction], opacity: 0 }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = `${delay}s`
+          el.classList.add('in-view')
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    )
 
-  const animate = shouldReduceMotion
-    ? { opacity: 1 }
-    : { y: 0, x: 0, opacity: 1 }
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay])
+
+  const dirClass =
+    direction === 'left'
+      ? 'reveal-left'
+      : direction === 'right'
+      ? 'reveal-right'
+      : 'reveal-up'
 
   return (
-    <motion.div
-      initial={initial}
-      whileInView={animate}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{
-        duration: 0.7,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={className}
-    >
+    <div ref={ref} className={`reveal ${dirClass} ${className}`}>
       {children}
-    </motion.div>
+    </div>
   )
 }

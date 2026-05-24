@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import MotionWrapper from './MotionWrapper'
 
@@ -33,15 +30,13 @@ export default function CaseStudies() {
           </MotionWrapper>
         </div>
 
-        {/* Large Card - Different Treatment */}
+        {/* Large Card */}
         <MotionWrapper delay={0.2}>
-          <motion.a
+          <a
             href="https://www.behance.net/dwfice"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer relative"
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3 }}
+            className="card-link block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer relative"
           >
             <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               {/* Top Left - Title */}
@@ -51,16 +46,11 @@ export default function CaseStudies() {
 
               {/* Top Right - Arrow Icon */}
               <div className="flex justify-start md:justify-end">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 45 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ArrowUpRight
-                    size={32}
-                    className="text-accent flex-shrink-0"
-                    aria-hidden="true"
-                  />
-                </motion.div>
+                <ArrowUpRight
+                  size={32}
+                  className="text-accent flex-shrink-0 card-arrow"
+                  aria-hidden="true"
+                />
               </div>
 
               {/* Bottom - Description */}
@@ -69,14 +59,9 @@ export default function CaseStudies() {
               </div>
             </div>
 
-            {/* Glow effect on hover */}
-            <motion.div
-              className="absolute inset-0 rounded-md pointer-events-none"
-              initial={{ boxShadow: '0 0 0 0 rgba(202,255,0,0)' }}
-              whileHover={{ boxShadow: '0 0 24px rgba(202,255,0,0.15)' }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.a>
+            {/* Glow effect — CSS box-shadow transition only */}
+            <span className="card-glow absolute inset-0 rounded-md pointer-events-none" />
+          </a>
         </MotionWrapper>
       </div>
     </section>
