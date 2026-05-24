@@ -39,9 +39,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-dvh flex items-center justify-center px-6 md:px-12 pt-24 pb-16"
+      className="min-h-dvh flex items-center justify-center px-6 md:px-12 pt-24 pb-24 md:pb-32"
     >
-      <div className="max-w-[1440px] w-full mx-auto grid md:grid-cols-[60fr_40fr] gap-12 md:gap-24 items-center">
+      <div className="max-w-[1280px] w-full mx-auto grid md:grid-cols-[60fr_40fr] gap-12 md:gap-24 items-center">
         {/* Left Column - Copy */}
         <div className="space-y-8">
           {/* Label */}

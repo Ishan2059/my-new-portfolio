@@ -73,9 +73,15 @@ export default function Header() {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="font-syne font-bold text-[13px] tracking-[0.15em] uppercase hover:text-accent transition-colors"
+            className="group transition-colors"
+            aria-label="Ishan Mishra - Home"
           >
-            ISHAN MISHRA
+            <img
+              src="/logo.png"
+              alt="Ishan Mishra Logo"
+              className="h-10 w-auto transition-opacity logo-img"
+              draggable="false"
+            />
           </a>
 
           {/* Desktop Navigation */}

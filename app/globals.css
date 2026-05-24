@@ -1,3 +1,10 @@
+/* Logo hover swap */
+.logo-img {
+  transition: opacity 0.2s;
+}
+.group:hover .logo-img {
+  content: url('/Logo (1).png');
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

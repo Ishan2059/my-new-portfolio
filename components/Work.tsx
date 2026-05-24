@@ -7,10 +7,10 @@ export default function Work() {
   return (
     <section
       id="work"
-      className="py-32 px-6 md:px-12 pt-40 border-t border-border"
+      className="py-20 md:py-32 px-6 md:px-12 mb-12 md:mb-24 border-t border-border"
       aria-labelledby="work-heading"
     >
-      <div className="max-w-[1440px] mx-auto space-y-16">
+      <div className="max-w-[1280px] mx-auto space-y-16">
         {/* Header */}
         <div className="space-y-6">
           <MotionWrapper>

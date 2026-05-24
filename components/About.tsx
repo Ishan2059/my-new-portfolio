@@ -17,10 +17,10 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-32 px-6 md:px-12 pt-40 border-t border-border"
+      className="py-20 md:py-32 px-6 md:px-12 mb-12 md:mb-24 border-t border-border"
       aria-labelledby="about-heading"
     >
-      <div className="max-w-[1440px] mx-auto grid md:grid-cols-[200px_1fr] gap-12 md:gap-24">
+      <div className="max-w-[1280px] mx-auto grid md:grid-cols-[200px_1fr] gap-12 md:gap-24">
         {/* Left Column - Decorative Label - REMOVED */}
 
         {/* Right Column - Content */}

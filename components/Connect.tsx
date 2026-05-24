@@ -29,10 +29,10 @@ export default function Connect() {
   return (
     <section
       id="connect"
-      className="py-32 px-6 md:px-12 pt-40 border-t border-border"
+      className="py-20 md:py-32 px-6 md:px-12 mb-12 md:mb-24 border-t border-border"
       aria-labelledby="connect-heading"
     >
-      <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-12 md:gap-24">
+      <div className="max-w-[1280px] mx-auto grid md:grid-cols-2 gap-12 md:gap-24">
         {/* Left Column - Message */}
         <div className="space-y-8">
           <MotionWrapper>

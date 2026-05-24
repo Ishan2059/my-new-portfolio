@@ -7,8 +7,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-border px-6 md:px-12 py-8">
-      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="border-t border-border px-6 md:px-12 py-8 mt-12 md:mt-24">
+      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left - Copyright */}
         <p className="font-dm text-[13px] text-text-muted text-center md:text-left">
           © 2025 Ishan Mishra. Designed & built with intent.
