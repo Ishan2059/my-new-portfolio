@@ -19,7 +19,7 @@ export default function Header() {
   const backgroundColor = useTransform(
     scrollY,
     [0, 60],
-    ['rgba(10,10,10,0)', 'rgba(10,10,10,0.85)']
+    ['rgba(10,10,10,0)', 'rgba(10,10,10,0.95)']
   )
 
   const backdropBlur = useTransform(
