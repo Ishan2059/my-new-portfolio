@@ -55,10 +55,10 @@ export default function Connect() {
 
           <MotionWrapper delay={0.3}>
             <a
-              href="mailto:ishanmishra2059@gmail.com"
+              href="mailto:hello@ishanmishra.com.np"
               className="inline-block font-syne font-bold text-[20px] text-accent hover:underline underline-offset-4 transition-all"
             >
-              ishanmishra2059@gmail.com
+              hello@ishanmishra.com.np
             </a>
           </MotionWrapper>
         </div>
