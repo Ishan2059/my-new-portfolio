@@ -36,11 +36,11 @@ export default function CaseStudies() {
             href="https://www.behance.net/dwfice"
             target="_blank"
             rel="noopener noreferrer"
-            className="card-link block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer relative"
+            className="card-link block w-full bg-surface border border-border rounded-md p-12 md:p-16 group cursor-pointer overflow-hidden relative"
           >
             <div className="grid md:grid-cols-2 gap-4 md:gap-12">
               {/* Top Left - Title */}
-              <div className="font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-text-primary break-words">
+              <div className="card-link-text font-syne font-extrabold text-[clamp(28px,7vw,64px)] leading-none text-text-primary break-words">
                 BEHANCE
               </div>
 
@@ -59,8 +59,7 @@ export default function CaseStudies() {
               </div>
             </div>
 
-            {/* Glow effect — CSS box-shadow transition only */}
-            <span className="card-glow absolute inset-0 rounded-md pointer-events-none" />
+            <span className="card-link-border absolute inset-0 border-2 border-transparent rounded-md pointer-events-none" />
           </a>
         </MotionWrapper>
       </div>

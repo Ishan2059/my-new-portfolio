@@ -16,11 +16,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-dvh relative overflow-hidden"
+      className="min-h-[100dvh] relative overflow-hidden"
     >
       {/* 3D Spline Scene — positioned on the right half */}
       <div
-        className="absolute top-0 bottom-0 left-[45%] right-0 hidden md:block hero-animate-scene"
+        className="absolute top-0 bottom-0 left-[55%] right-0 hidden md:block lg:left-[45%] hero-animate-scene"
       >
         <SplineScene 
           scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
@@ -29,9 +29,9 @@ export default function Hero() {
       </div>
 
       {/* Text content — floats on top, pointer-events-none so cursor reaches Spline */}
-      <div className="relative z-10 pointer-events-none flex items-center min-h-dvh px-6 md:px-12 pt-24 pb-24 md:pb-32">
+      <div className="relative z-10 pointer-events-none flex items-center min-h-[100dvh] px-6 md:px-12 pt-28 md:pt-24 pb-24 md:pb-32">
         <div className="max-w-[1280px] w-full mx-auto">
-          <div className="max-w-[600px] space-y-8">
+          <div className="max-w-[660px] md:max-w-[520px] lg:max-w-[600px] space-y-8">
             {/* Label */}
             <div
               className="hero-animate-label font-dm font-medium text-[12px] tracking-[0.12em] uppercase text-accent"
@@ -42,7 +42,6 @@ export default function Hero() {
             {/* Display Headline */}
             <h1
               className="font-syne font-extrabold text-[clamp(52px,8vw,96px)] leading-[0.95] tracking-[-0.04em] text-text-primary"
-              style={{ wordSpacing: '100vw' }}
             >
               {words.map((word, index) => (
                 <span
