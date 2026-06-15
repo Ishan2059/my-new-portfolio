@@ -29,7 +29,7 @@ export default function Hero() {
       </div>
 
       {/* Text content — floats on top, pointer-events-none so cursor reaches Spline */}
-      <div className="relative z-10 pointer-events-none flex items-center min-h-[100dvh] px-6 md:px-12 pt-28 md:pt-24 pb-24 md:pb-32">
+      <div className="relative z-10 pointer-events-none flex items-center min-h-[100dvh] px-6 md:px-12 pt-36 md:pt-32 pb-28 md:pb-36">
         <div className="max-w-[1280px] w-full mx-auto">
           <div className="max-w-[660px] md:max-w-[520px] lg:max-w-[600px] space-y-8">
             {/* Label */}
@@ -64,7 +64,7 @@ export default function Hero() {
 
             {/* CTA Row */}
             <div
-              className="hero-animate-cta flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pointer-events-auto"
+              className="hero-animate-cta flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto pointer-events-auto"
             >
               <MagneticButton
                 onClick={handleWorkClick}
@@ -73,11 +73,12 @@ export default function Hero() {
                 See My Work
               </MagneticButton>
               <a
-                href="/resume.pdf"
-                download="Ishan-Mishra-Resume.pdf"
+                href="https://calendly.com/ishanmishra2059/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto border border-[#333] text-text-primary font-syne font-bold text-[14px] px-10 py-5 rounded-full hover:border-accent hover:text-accent transition-colors text-center"
               >
-                Download Resume
+                Book meeting
               </a>
             </div>
           </div>
