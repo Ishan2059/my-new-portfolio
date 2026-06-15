@@ -49,6 +49,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://ishanmishra.com.np"
+  },
+  icons: {
+    icon: "/favicon.ico"
   }
 }
 
