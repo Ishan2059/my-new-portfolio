@@ -92,6 +92,8 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://ishanmishra.com.np/favicon.ico" />
+        <link rel="apple-touch-icon" href="https://ishanmishra.com.np/favicon.ico" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
