@@ -1,7 +1,7 @@
 'use client'
 
 import MagneticButton from './MagneticButton'
-import { SplineScene } from './ui/splite'
+import { Prism } from './ui/prism'
 
 const words = ['Ishan', 'Mishra']
 
@@ -18,17 +18,14 @@ export default function Hero() {
       id="home"
       className="min-h-[100dvh] relative overflow-hidden"
     >
-      {/* 3D Spline Scene — positioned on the right half */}
+      {/* Interactive prism — positioned on the right half */}
       <div
         className="absolute top-0 bottom-0 left-[55%] right-0 hidden md:block lg:left-[45%] hero-animate-scene"
       >
-        <SplineScene 
-          scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          className="w-full h-full"
-        />
+        <Prism className="w-full h-full" />
       </div>
 
-      {/* Text content — floats on top, pointer-events-none so cursor reaches Spline */}
+      {/* Text content — floats on top, pointer-events-none so cursor reaches the prism */}
       <div className="relative z-10 pointer-events-none flex items-center min-h-[100dvh] px-6 md:px-12 pt-36 md:pt-32 pb-28 md:pb-36">
         <div className="max-w-[1280px] w-full mx-auto">
           <div className="max-w-[660px] md:max-w-[520px] lg:max-w-[600px] space-y-8">
