@@ -1,16 +1,7 @@
 ﻿'use client'
 
-import { Component, Suspense, lazy, useState, useEffect, useRef, useCallback, type ReactNode } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Application } from '@splinetool/runtime'
-
-const Spline = lazy(() => import('@splinetool/react-spline'))
-
-// A failed decorative scene should never take down the portfolio.
-class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false }
-  static getDerivedStateFromError() { return { failed: true } }
-  render() { return this.state.failed ? null : this.props.children }
-}
 
 interface SplineSceneProps {
   scene: string
@@ -18,77 +9,116 @@ interface SplineSceneProps {
 }
 
 export function SplineScene({ scene, className }: SplineSceneProps) {
-  const [shouldLoad, setShouldLoad] = useState(false)
-  const [ready, setReady] = useState(false)
-  const [active, setActive] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const appRef = useRef<Application | null>(null)
-  const activeRef = useRef(false)
-  const reducedMotionRef = useRef(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container) return
+    const canvas = canvasRef.current
+    if (!container || !canvas) return
+
+    let app: Application | undefined
+    let disposed = false
+    let started = false
     let inView = false
+    let loaded = false
+    let idleId: number | undefined
+    let frameId: number | undefined
+    const abort = new AbortController()
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => {
-      const visible = inView && !document.hidden
-      activeRef.current = visible
-      reducedMotionRef.current = motion.matches
-      setActive(visible)
-      if (visible && !motion.matches) appRef.current?.play()
-      else appRef.current?.stop()
+    setReady(false)
+
+    const resize = () => {
+      if (!app || !container.clientWidth || !container.clientHeight) return
+      // Render fewer pixels while keeping the same aspect ratio and scene framing.
+      // 80% on each axis uses 36% fewer pixels than the full-size canvas.
+      const scale = 0.8
+      app.setSize(Math.round(container.clientWidth * scale), Math.round(container.clientHeight * scale))
+      app.setZoom(scale)
+      canvas.style.width = '100%'
+      canvas.style.height = '100%'
+    }
+
+    const syncPlayback = () => {
+      if (!app || !loaded) return
+      if (inView && !document.hidden && !motion.matches) app.play()
+      else app.stop()
+    }
+
+    const start = async () => {
+      if (started || disposed || !inView || document.hidden) return
+      started = true
+      try {
+        // Start both downloads together instead of waiting for the JS bundle
+        // before requesting the scene. No fixed multi-second delay.
+        const [{ Application }, data] = await Promise.all([
+          import('@splinetool/runtime'),
+          fetch(scene, { signal: abort.signal }).then(response => {
+            if (!response.ok) throw new Error('Scene unavailable')
+            return response.arrayBuffer()
+          }),
+        ])
+        if (disposed) return
+        app = new Application(canvas, { renderMode: 'auto' })
+        resize()
+        await app.start(data)
+        if (disposed) { app.dispose(); return }
+        resize()
+        loaded = true
+        // Allow the first frame to paint before revealing or freezing the scene.
+        frameId = requestAnimationFrame(() => {
+          if (disposed) return
+          setReady(true)
+          syncPlayback()
+        })
+      } catch {
+        // This decorative scene must never prevent the page from working.
+        app?.dispose()
+        app = undefined
+      }
+    }
+
+    const schedule = () => {
+      syncPlayback()
+      if (started || !inView || document.hidden) return
+      if (idleId !== undefined) window.cancelIdleCallback(idleId)
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(() => { void start() }, { timeout: 250 })
+      } else {
+        void start()
+      }
     }
     const observer = new IntersectionObserver(([entry]) => {
-      // Hidden mobile containers must not load WebGL.
+      // Do not download or initialize the hidden mobile scene.
       inView = entry.isIntersecting && entry.boundingClientRect.width > 0 && entry.boundingClientRect.height > 0
-      update()
+      schedule()
     })
+    const resizeObserver = new ResizeObserver(resize)
     observer.observe(container)
-    document.addEventListener('visibilitychange', update)
-    motion.addEventListener('change', update)
-    update()
-    return () => {
-      observer.disconnect()
-      document.removeEventListener('visibilitychange', update)
-      motion.removeEventListener('change', update)
-      appRef.current = null
-    }
-  }, [])
+    resizeObserver.observe(container)
+    document.addEventListener('visibilitychange', schedule)
+    motion.addEventListener('change', syncPlayback)
 
-  useEffect(() => {
-    if (!active || shouldLoad) return
-    let idleId: number | undefined
-    // Let the hero entrance finish before downloading and initializing WebGL.
-    const timer = window.setTimeout(() => {
-      if ('requestIdleCallback' in window) {
-        idleId = window.requestIdleCallback(() => setShouldLoad(true), { timeout: 3000 })
-      } else {
-        setShouldLoad(true)
-      }
-    }, 2200)
     return () => {
-      window.clearTimeout(timer)
+      disposed = true
+      abort.abort()
       if (idleId !== undefined) window.cancelIdleCallback(idleId)
+      if (frameId !== undefined) cancelAnimationFrame(frameId)
+      observer.disconnect()
+      resizeObserver.disconnect()
+      document.removeEventListener('visibilitychange', schedule)
+      motion.removeEventListener('change', syncPlayback)
+      app?.dispose()
     }
-  }, [active, shouldLoad])
-
-  const handleLoad = useCallback((app: Application) => {
-    appRef.current = app
-    if (!activeRef.current || reducedMotionRef.current) app.stop()
-    setReady(true)
-  }, [])
+  }, [scene])
 
   return (
     <div ref={containerRef} className={className} aria-hidden="true">
-      {shouldLoad && (
-        <SceneBoundary>
-          <Suspense fallback={null}>
-            <Spline scene={scene} onLoad={handleLoad} renderOnDemand
-              className={`w-full h-full transition-opacity duration-700 ${ready ? 'opacity-100' : 'opacity-0'}`} />
-          </Suspense>
-        </SceneBoundary>
-      )}
+      {/* Keep the runtime's own ResizeObserver at the reduced resolution too. */}
+      <div className="w-4/5 h-4/5 origin-top-left scale-125">
+        <canvas ref={canvasRef} className={`block w-full h-full transition-opacity duration-300 ${ready ? 'opacity-100' : 'opacity-0'}`} />
+      </div>
     </div>
   )
 }
