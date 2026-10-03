@@ -17,8 +17,8 @@ export default function Hero() {
       id="home"
       className="min-h-[100dvh] relative overflow-hidden"
     >
-      <div className="relative mx-auto flex min-h-[100dvh] max-w-[1376px] items-center px-[24px] pb-[64px] pt-[112px] md:px-[48px] md:pb-[80px] md:pt-[144px] lg:pt-[128px]">
-        <div className="grid w-full grid-cols-1 items-center gap-[32px] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-[48px]">
+      <div className="relative mx-auto flex min-h-[100dvh] max-w-[1376px] items-center px-[clamp(16px,6vw,24px)] pb-[64px] pt-[104px] md:px-[48px] md:pb-[80px] md:pt-[144px] lg:pt-[128px]">
+        <div className="grid w-full grid-cols-1 items-center gap-[24px] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-[32px] lg:gap-[48px]">
           <div className="relative z-10 flex min-w-0 max-w-[600px] flex-col gap-[24px] md:gap-[32px]">
             {/* Label */}
             <div
@@ -29,7 +29,7 @@ export default function Hero() {
 
             {/* Display Headline */}
             <h1
-              className="font-syne font-extrabold text-[clamp(52px,8vw,96px)] leading-[1] tracking-[-0.04em] text-text-primary"
+              className="font-syne font-extrabold text-[clamp(44px,13vw,64px)] leading-[1] tracking-[-0.04em] text-text-primary md:text-[clamp(52px,8vw,96px)]"
             >
               {words.map((word, index) => (
                 <span
@@ -72,12 +72,12 @@ export default function Hero() {
           </div>
 
           <div
-            className="hero-animate-scene pointer-events-none flex min-w-0 items-center justify-center"
+            className="hero-animate-scene pointer-events-none order-first flex min-w-0 items-center justify-center md:order-last"
             aria-hidden="true"
           >
             <video
               src="/portfolio-hero-transparent.webm"
-              className="w-[150%] max-w-[640px] shrink-0 object-contain md:max-w-none"
+              className="aspect-video w-[150%] max-w-[640px] shrink-0 object-contain md:max-w-none"
               autoPlay
               muted
               loop

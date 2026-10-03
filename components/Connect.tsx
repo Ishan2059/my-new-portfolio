@@ -26,9 +26,9 @@ export default function Connect() {
       className="py-20 md:py-32 px-6 md:px-12 mb-12 md:mb-24 border-t border-border"
       aria-labelledby="connect-heading"
     >
-      <div className="max-w-[1280px] mx-auto grid md:grid-cols-2 gap-12 md:gap-24">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
         {/* Left Column - Message */}
-        <div className="space-y-8">
+        <div className="min-w-0 space-y-8">
           <MotionWrapper>
             <div className="font-dm font-medium text-[12px] tracking-[0.12em] uppercase text-text-muted">
               CONNECT
@@ -38,7 +38,7 @@ export default function Connect() {
           <MotionWrapper delay={0.1}>
             <h2
               id="connect-heading"
-              className="font-syne font-extrabold text-[clamp(40px,6vw,64px)] leading-tight tracking-[-0.03em] text-text-primary"
+              className="font-syne font-extrabold text-[clamp(32px,9vw,40px)] leading-tight tracking-[-0.03em] text-text-primary md:text-[clamp(40px,6vw,64px)]"
             >
               Let&apos;s build
               <br />
@@ -56,7 +56,7 @@ export default function Connect() {
           <MotionWrapper delay={0.3}>
             <a
               href="mailto:hello@ishanmishra.com.np"
-              className="inline-block font-syne font-bold text-[20px] text-accent hover:underline underline-offset-4 transition-all"
+              className="inline-block max-w-full break-words font-syne font-bold text-[clamp(16px,4.5vw,20px)] text-accent hover:underline underline-offset-4 transition-all"
             >
               hello@ishanmishra.com.np
             </a>
@@ -73,7 +73,7 @@ export default function Connect() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-card bg-surface border border-border rounded-md p-6 flex flex-col items-start justify-between gap-4 group min-h-[140px]"
+                className="social-card bg-surface border border-border rounded-md p-[16px] sm:p-6 flex min-w-0 flex-col items-start justify-between gap-4 group min-h-[140px]"
               >
                 <social.icon
                   size={24}
@@ -90,7 +90,7 @@ export default function Connect() {
             <a
               href="/resume.pdf"
               download="Ishan-Mishra-Resume.pdf"
-              className="resume-card bg-accent text-bg border-2 border-accent rounded-md p-6 flex flex-col items-start justify-between gap-4 group min-h-[140px]"
+              className="resume-card bg-accent text-bg border-2 border-accent rounded-md p-[16px] sm:p-6 flex min-w-0 flex-col items-start justify-between gap-4 group min-h-[140px]"
             >
               <FileDown
                 size={24}
