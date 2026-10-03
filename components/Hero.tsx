@@ -17,7 +17,7 @@ export default function Hero() {
       id="home"
       className="min-h-[100dvh] relative overflow-hidden"
     >
-      <div className="relative mx-auto flex min-h-[100dvh] max-w-[1376px] items-center px-[24px] pb-[80px] pt-[144px] md:px-[48px] lg:pt-[128px]">
+      <div className="relative mx-auto flex min-h-[100dvh] max-w-[1376px] items-center px-[24px] pb-[64px] pt-[112px] md:px-[48px] md:pb-[80px] md:pt-[144px] lg:pt-[128px]">
         <div className="grid w-full grid-cols-1 items-center gap-[32px] md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-[48px]">
           <div className="relative z-10 flex min-w-0 max-w-[600px] flex-col gap-[24px] md:gap-[32px]">
             {/* Label */}
@@ -72,12 +72,12 @@ export default function Hero() {
           </div>
 
           <div
-            className="hero-animate-scene pointer-events-none hidden min-w-0 items-center justify-center md:flex"
+            className="hero-animate-scene pointer-events-none flex min-w-0 items-center justify-center"
             aria-hidden="true"
           >
             <video
               src="/portfolio-hero-transparent.webm"
-              className="w-[150%] max-w-none shrink-0 object-contain"
+              className="w-[150%] max-w-[640px] shrink-0 object-contain md:max-w-none"
               autoPlay
               muted
               loop
